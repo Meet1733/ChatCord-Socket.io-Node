@@ -32,7 +32,7 @@ io.on('connection', socket => {
         socket.emit('message' , formatMessage(botName , 'Welcome to ChatCord!'));
 
         //Broadcast when a user connect to everyone except the user who connects
-        socket.broadcast.emit('message' , formatMessage(botName , `${user.username} has joined the chat`));
+        socket.broadcast.to(user.room).emit('message' , formatMessage(botName , `${user.username} has joined the chat`));
 
         //Send users and room info
         io.to(user.room).emit('roomUsers' , {
